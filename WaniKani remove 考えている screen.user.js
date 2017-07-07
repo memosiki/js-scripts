@@ -10,5 +10,6 @@
 (function() {
     $( document ).ready(function() {
         $('#loading').remove();
+        console.log('Removal of waiting screen successful!');
     });
 })();
