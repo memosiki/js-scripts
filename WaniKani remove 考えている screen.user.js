@@ -9,8 +9,13 @@
 // ==/UserScript==
 
 (function() {
-    $( document ).ready(function() {
-        $('#loading').remove();
-        console.log("Removal of waiting screen successful!");
+    $(document).ready(function() {
+        if (/\/review\/./.test(document.URL)) {
+            $('#loading').remove();
+            if (!document.getElementById('loading')) console.log('Removal of waiting screen successful!');
+        } else if (/\/lesson/.test(document.URL)) {
+            $('#loading-screen').remove();
+            if (!document.getElementById('loading-screen')) console.log('Removal of waiting screen successful!');
+        }
     });
 })();

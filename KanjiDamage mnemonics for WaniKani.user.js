@@ -104,7 +104,6 @@ var curPage = PageEnum.unknown;
                     //the setTimeout is copied from   -->   https://stackoverflow.com/a/32572626/5287133
                     $(document).ready(function() { //When document has loaded
                         setTimeout(function() { //Code to run After timeout elapses
-                            console.log('inpat');
                             reviewMn();
                             reviewOn();
                         }, 50); //100ms will elapse and Code will execute.
@@ -158,7 +157,7 @@ var curPage = PageEnum.unknown;
 
             observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
-                    console.log(mutation.type);
+                    //console.log(mutation.type);
                     document.getElementById("kdmeaning").innerHTML = getMeaning();
                     if (document.getElementById("kdmeaning").innerHTML === "" ) document.getElementById("kdmeaning").innerHTML = "This Kanji has no meaning mnemonic";
 
@@ -173,7 +172,7 @@ var curPage = PageEnum.unknown;
                             document.getElementById("rowS").innerHTML = '<td id="cell" style="width:75%">This Kanji has no reading mnemonic </td>';
                         else {
                             table.rows[0].cells[0].setAttribute("id", "rowS");
-                            document.getElementById("rowS").insertAdjacentHTML('afterend', '<td id="cell" style="width:75%"> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</td>');
+                            document.getElementById("rowS").insertAdjacentHTML('afterend', '<td id="cell" style="width:90%"> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</td>');
                         }
                     } else {
                         //console.log('else');
@@ -189,8 +188,8 @@ var curPage = PageEnum.unknown;
                     reviewOn();
                 });
             });
-            observer.observe(document.querySelector('#supplement-kan-meaning-mne'), { childList: true, attributes: true });
-            observer.observe(document.querySelector('#information'), {childList: true, attributes: true });
+            //observer.observe(document.querySelector('#supplement-kan-meaning'), { attributes: true });
+            observer.observe(document.querySelector('#lessons'), {childList: true, attributes: true });
 
             break;
     }
