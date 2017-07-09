@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name             KanjiDamage mnemonics for WaniKani
-// @version          1.0
+// @version          1.1
 // @description      Displays additional mnemonics for the given kanji.
 // @namespace        https://github.com/grenzionky/KanjiDamage-mnemonics-for-WaniKani/blob/master/KanjiDamage%20mnemonics%20for%20WaniKani.user.js
 // @match            *://www.wanikani.com/kanji*
@@ -130,7 +130,6 @@ var curPage = PageEnum.unknown;
             ms.setAttribute('id', 'kdmeaning');
             mlocation.insertBefore(mp, mlocation.children[3]);
             mlocation.insertBefore(ms, mlocation.children[4]);
-            ms = document.getElementById("kdmeaning");
             mheading = document.createElement("H2");
             mhTxt = document.createTextNode("KanjiDamage Meaning Mnemonic");
             mheading.appendChild(mhTxt);
@@ -142,7 +141,6 @@ var curPage = PageEnum.unknown;
             ms.setAttribute('id', 'kdreading');
             mlocation.insertBefore(mp, mlocation.children[3]);
             mlocation.insertBefore(ms, mlocation.children[4]);
-            ms = document.getElementById("kdreading");
             mheading = document.createElement("H2");
             mhTxt = document.createTextNode("KanjiDamage Onyomi Mnemonic");
             mheading.appendChild(mhTxt);
@@ -166,7 +164,7 @@ var curPage = PageEnum.unknown;
                     table = document.getElementById("kdrtable");
                     //console.log(table.innerText);
                     //console.log(table.innerText.length);
-                    if (table.innerText.length < 15) {
+                    if (table.innerText.length < 16) {
                         //console.log('true');
                         if (document.getElementById('rowS'))
                             document.getElementById("rowS").innerHTML = '<td id="cell" style="width:75%">This Kanji has no reading mnemonic </td>';
@@ -188,7 +186,7 @@ var curPage = PageEnum.unknown;
                     reviewOn();
                 });
             });
-            //observer.observe(document.querySelector('#supplement-kan-meaning'), { attributes: true });
+            observer.observe(document.querySelector('#information'), { attributes: true });
             observer.observe(document.querySelector('#supplement-kan'), { attributes: true });
 
             break;
@@ -200,7 +198,7 @@ var curPage = PageEnum.unknown;
 // FUNCTIONS
 
 function reviewMn () {
-    if("kan" in $.jStorage.get("currentItem") || $("#character").hasClass("kanji")) {
+    if("kan" in $.jStorage.get("currentItem") || $("#character").parent()[0].className === 'kanji' /*$("#character").hasClass("kanji")*/) {
         sc = document.createElement('span');
         ms = document.createElement('section');
         if (curPage === PageEnum.reviews) {       ///////////////////////////CHECK HERE (THIS 'IF' (THE ID'S)) FOR NOT SHOWING UP BUG IN THE FUTURE
@@ -237,7 +235,7 @@ function reviewMn () {
 }
 
 function reviewOn () {
-    if("kan" in $.jStorage.get("currentItem") || $("#character").hasClass("kanji")) {
+    if("kan" in $.jStorage.get("currentItem") || $("#character").parent()[0].className === 'kanji' /*$("#character").hasClass("kanji")*/) {
         // creates the area to place the reading mnemonic
         mlocation = document.getElementById("note-reading");
         ms = document.createElement('section');
