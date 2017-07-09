@@ -189,7 +189,7 @@ var curPage = PageEnum.unknown;
                 });
             });
             //observer.observe(document.querySelector('#supplement-kan-meaning'), { attributes: true });
-            observer.observe(document.querySelector('#lessons'), {childList: true, attributes: true });
+            observer.observe(document.querySelector('#supplement-kan'), { attributes: true });
 
             break;
     }
