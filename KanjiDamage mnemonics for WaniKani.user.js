@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name             KanjiDamage mnemonics for WaniKani
-// @version          1.1
+// @version          1.2
 // @description      Displays additional mnemonics for the given kanji.
 // @namespace        https://github.com/grenzionky/KanjiDamage-mnemonics-for-WaniKani/blob/master/KanjiDamage%20mnemonics%20for%20WaniKani.user.js
 // @match            *://www.wanikani.com/kanji*
@@ -114,7 +114,6 @@ var curPage = PageEnum.unknown;
                     if (mutations.length != 2) { return; }   //this line is copied from looki's WaniKani Stroke Order script
 
                 });
-                if (getKDPage() !== undefined) console.log("The KanjiDamage page is:   " + getKDPage().substring(29));
             });
             observer.observe(document.querySelector('#information'), { attributes: true });
 
@@ -199,36 +198,40 @@ var curPage = PageEnum.unknown;
 
 function reviewMn () {
     if("kan" in $.jStorage.get("currentItem") || $("#character").parent()[0].className === 'kanji' /*$("#character").hasClass("kanji")*/) {
-        sc = document.createElement('span');
-        ms = document.createElement('section');
-        if (curPage === PageEnum.reviews) {       ///////////////////////////CHECK HERE (THIS 'IF' (THE ID'S)) FOR NOT SHOWING UP BUG IN THE FUTURE
-            //console.log('this is a review page');
-            ms.setAttribute('id', 'rmmeaning');
-            sc.setAttribute('id', 'rsc');
-        } else {
-            //console.log('this is a lesson page');
-            ms.setAttribute('id', 'lmmeaning');
-            sc.setAttribute('id', 'lsc');
+        if (!$('#rmmeaning').length) {
+            sc = document.createElement('span');
+            ms = document.createElement('section');
+            if (curPage === PageEnum.reviews) {       ///////////////////////////CHECK HERE (THIS 'IF' (THE ID'S)) FOR NOT SHOWING UP BUG IN THE FUTURE
+                //console.log('this is a review page');
+                ms.setAttribute('id', 'rmmeaning');
+                sc.setAttribute('id', 'rsc');
+            } else {
+                //console.log('this is a lesson page');
+                ms.setAttribute('id', 'lmmeaning');
+                sc.setAttribute('id', 'lsc');
+            }
+            //console.log(ms);
+            mheading = document.createElement("H2");
+            mhTxt = document.createTextNode("KanjiDamage Meaning Mnemonic");
+            mheading.appendChild(mhTxt);
+            //console.log(mheading);
+            ms.insertAdjacentElement('afterbegin', mheading);
+            //console.log(ms);
+            mlocation = document.getElementById('note-meaning');
+            //console.log(mlocation);
+            mlocation.insertAdjacentElement('beforebegin', ms);
+
+            if (mlocation.getAttribute('style') === 'display: none;')
+                ms.setAttribute('style', 'display: none;');
+            else ms.setAttribute('style', 'display: block;');
+
+            sc.innerHTML = getMeaning();
+            ms.insertAdjacentElement('beforeend', sc);
+
+            if (sc.innerText === "" ) sc.innerText = "This Kanji has no meaning mnemonic";
+
+            if (getKDPage() !== undefined) console.log("The KanjiDamage page is:   " + getKDPage().substring(29));
         }
-        //console.log(ms);
-        mheading = document.createElement("H2");
-        mhTxt = document.createTextNode("KanjiDamage Meaning Mnemonic");
-        mheading.appendChild(mhTxt);
-        //console.log(mheading);
-        ms.insertAdjacentElement('afterbegin', mheading);
-        //console.log(ms);
-        mlocation = document.getElementById('note-meaning');
-        //console.log(mlocation);
-        mlocation.insertAdjacentElement('beforebegin', ms);
-
-        if (mlocation.getAttribute('style') === 'display: none;')
-            ms.setAttribute('style', 'display: none;');
-        else ms.setAttribute('style', 'display: block;');
-
-        sc.innerHTML = getMeaning();
-        ms.insertAdjacentElement('beforeend', sc);
-
-        if (sc.innerText === "" ) sc.innerText = "This Kanji has no meaning mnemonic";
     }
     else
         return null;
@@ -236,50 +239,52 @@ function reviewMn () {
 
 function reviewOn () {
     if("kan" in $.jStorage.get("currentItem") || $("#character").parent()[0].className === 'kanji' /*$("#character").hasClass("kanji")*/) {
-        // creates the area to place the reading mnemonic
-        mlocation = document.getElementById("note-reading");
-        ms = document.createElement('section');
-        mp2 = document.createElement("table");
-        if (curPage === PageEnum.reviews) {
-            ms.setAttribute('id', 'rrreading');
-            mp2.setAttribute("id", "rrrtable");
-        } else {
-            ms.setAttribute('id', 'lrreading');
-            mp2.setAttribute("id", "lrrtable");
-        }
-        //mlocation.insertAdjacentElement('beforebegin', mp);
-        mheading = document.createElement("H2");
-        mhTxt = document.createTextNode("KanjiDamage Onyomi Mnemonic");
-        mheading.appendChild(mhTxt);
-        ms.insertAdjacentElement('afterbegin', mheading);
-        mlocation.insertAdjacentElement('beforebegin', ms);
+        if (!$('#rrreading').length) {
+            // creates the area to place the reading mnemonic
+            mlocation = document.getElementById("note-reading");
+            ms = document.createElement('section');
+            mp2 = document.createElement("table");
+            if (curPage === PageEnum.reviews) {
+                ms.setAttribute('id', 'rrreading');
+                mp2.setAttribute("id", "rrrtable");
+            } else {
+                ms.setAttribute('id', 'lrreading');
+                mp2.setAttribute("id", "lrrtable");
+            }
+            //mlocation.insertAdjacentElement('beforebegin', mp);
+            mheading = document.createElement("H2");
+            mhTxt = document.createTextNode("KanjiDamage Onyomi Mnemonic");
+            mheading.appendChild(mhTxt);
+            ms.insertAdjacentElement('afterbegin', mheading);
+            mlocation.insertAdjacentElement('beforebegin', ms);
 
-        if (mlocation.getAttribute('style') === 'display: none;')
-            ms.setAttribute('style', 'display: none;');
-        else ms.setAttribute('style', 'display: block;');
+            if (mlocation.getAttribute('style') === 'display: none;')
+                ms.setAttribute('style', 'display: none;');
+            else ms.setAttribute('style', 'display: block;');
 
-        table = mp2;
-        ms.appendChild(mp2);
-        //console.log(ms.innerHTML);
-        //console.log(getOnyomi());
-        table.insertAdjacentHTML('afterbegin', getOnyomi());
-        //console.log(ms.innerHTML);
-        //console.log(table);
-        ms.appendChild(table);
-        //console.log(table.innerHTML);
-        //console.log(table.innerText.length);
-        if (table.innerText.length < 15) {
-            //console.log('true');
-            table.rows[0].cells[0].setAttribute("id", "rrowS");
-            table.rows[0].insertCell().setAttribute('id', 'newcell');
-            cell = document.getElementById('newcell');
-            cell.setAttribute('style', 'width:85%');
-            cell.insertAdjacentHTML('afterbegin', '<td id="cell" style="width:85%"> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</td>');
-        } else {
-            //console.log('else');
-            table.rows[0].cells[0].setAttribute("id", "rrowB");
-            document.getElementById("rrowB").insertAdjacentHTML('afterend', '<td id="cell" style="width:8%"></td>');
-            //console.log(ms);
+            table = mp2;
+            ms.appendChild(mp2);
+            //console.log(ms.innerHTML);
+            //console.log(getOnyomi());
+            table.insertAdjacentHTML('afterbegin', getOnyomi());
+            //console.log(ms.innerHTML);
+            //console.log(table);
+            ms.appendChild(table);
+            //console.log(table.innerHTML);
+            //console.log(table.innerText.length);
+            if (table.innerText.length < 16) {
+                //console.log('true');
+                table.rows[0].cells[0].setAttribute("id", "rrowS");
+                table.rows[0].insertCell().setAttribute('id', 'newcell');
+                cell = document.getElementById('newcell');
+                cell.setAttribute('style', 'width:85%');
+                cell.insertAdjacentHTML('afterbegin', '<td id="cell" style="width:85%"> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</td>');
+            } else {
+                //console.log('else');
+                table.rows[0].cells[0].setAttribute("id", "rrowB");
+                document.getElementById("rrowB").insertAdjacentHTML('afterend', '<td id="cell" style="width:8%"></td>');
+                //console.log(ms);
+            }
         }
     }
     else
