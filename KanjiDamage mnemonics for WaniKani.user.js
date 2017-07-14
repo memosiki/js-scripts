@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name             KanjiDamage mnemonics for WaniKani
-// @version          1.2
+// @version          1.2.1
 // @description      Displays additional mnemonics for the given kanji.
 // @namespace        https://github.com/grenzionky/KanjiDamage-mnemonics-for-WaniKani/blob/master/KanjiDamage%20mnemonics%20for%20WaniKani.user.js
 // @match            *://www.wanikani.com/kanji*
@@ -186,7 +186,7 @@ var curPage = PageEnum.unknown;
                 });
             });
             observer.observe(document.querySelector('#information'), { attributes: true });
-            observer.observe(document.querySelector('#supplement-kan'), { attributes: true });
+            observer.observe(document.querySelector('#supplement-kan-meaning'), { attributes: true });
 
             break;
     }
