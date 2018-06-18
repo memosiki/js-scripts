@@ -5,7 +5,7 @@
 // @author       Abraham Gross
 // @match        *
 // @grant        none
-// @License      MIT License Copyright (c) 2017 Abraham Gross
+// @license      MIT
 // ==/UserScript==
 
 (function() {
