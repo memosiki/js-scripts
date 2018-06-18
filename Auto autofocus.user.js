@@ -3,7 +3,7 @@
 // @version      1.0
 // @description  Auto focuses the cursor in websites to the first input box
 // @author       Abraham Gross
-// @match        *
+// @include      http*
 // @grant        none
 // @license      MIT
 // ==/UserScript==
