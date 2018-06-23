@@ -58,7 +58,7 @@ var htmls = {};
                 mp = document.createElement("P");
                 msection.appendChild(mp);
                 mheading = document.createElement("H2");
-                mheading.innerHTML = "<a id='kanjidamage_a1' target='_blank'>KanjiDamage</a> Meaning Mnemonic";
+                mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Meaning Mnemonic";
                 msection.appendChild(mheading);
                 mp2 = document.createElement("p");
                 mp2.setAttribute("id", "meaning");
