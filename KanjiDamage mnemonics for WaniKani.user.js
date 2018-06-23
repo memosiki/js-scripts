@@ -31,184 +31,186 @@ var htmls = {};
 
 /* MAIN */
 (function () {
-    // Determine page type
-    if (/\/kanji\/./.test(document.URL)) {
-        curPage = PageEnum.kanji;
-    } else if (/\/review\/./.test(document.URL)) {
-        curPage = PageEnum.reviews;
-    } else if (/\/lesson/.test(document.URL)) {
-        curPage = PageEnum.lessons;
-    }
-    //ends here
+    $(document).ready(function() {
+        // Determine page type
+        if (/\/kanji\/./.test(document.URL)) {
+            curPage = PageEnum.kanji;
+        } else if (/\/review\/./.test(document.URL)) {
+            curPage = PageEnum.reviews;
+        } else if (/\/lesson/.test(document.URL)) {
+            curPage = PageEnum.lessons;
+        }
+        //ends here
 
 
 
-    //where it gets displayed
-    var mgetElement, mlocation, msection, mp, mheading, mhTxt, mp2, mp3, ms, mmnemonic, mee, d1, table, list, observer;
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-    switch (curPage) {
-        case PageEnum.kanji:
-            if (getKDPage() !== undefined) console.log("The KanjiDamage page is:   " + getKDPage().substring(29));
+        //where it gets displayed
+        var mgetElement, mlocation, msection, mp, mheading, mhTxt, mp2, mp3, ms, mmnemonic, mee, d1, table, list, observer;
+        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+        switch (curPage) {
+            case PageEnum.kanji:
+                if (getKDPage() !== undefined) console.log("The KanjiDamage page is:   " + getKDPage().substring(29));
 
-            //meaning
-            mgetElement = document.getElementsByClassName("span12")[1];
-            mlocation = mgetElement.childNodes[mgetElement.childNodes.length-7];
-            msection = document.createElement("SECTION");
-            mp = document.createElement("P");
-            msection.appendChild(mp);
-            mheading = document.createElement("H2");
-            mheading.innerHTML = "<a id='kanjidamage_a1' target='_blank'>KanjiDamage</a> Meaning Mnemonic";
-            msection.appendChild(mheading);
-            mp2 = document.createElement("p");
-            mp2.setAttribute("id", "meaning");
-            msection.appendChild(mp2);
-            mgetElement.insertBefore(msection, mlocation);
-            //mmnemonic = document.createTextNode(getMeaning());
-            document.getElementById("meaning").innerHTML = "Loading...";
-            getMeaning(function(meaning) {
-                document.getElementById("meaning").innerHTML = meaning;
-                if (document.getElementById("meaning").innerHTML === "" ) document.getElementById("meaning").innerHTML = "This Kanji has no meaning mnemonic";
-            });
-
-            //reading
-            //console.log(getKDPage());
-            mlocation = mgetElement.childNodes[mgetElement.childNodes.length-5];
-            msection = document.createElement("SECTION");
-            mp = document.createElement("P");
-            msection.appendChild(mp);
-            mheading = document.createElement("H2");
-            mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Onyomi Mnemonic";
-            msection.appendChild(mheading);
-            mp2 = document.createElement("table");
-            mp2.setAttribute("id", "readingO");
-            msection.appendChild(mp2);
-            mgetElement.insertBefore(msection, mlocation);
-            //console.log(getOnyomi());
-
-            getOnyomi(function(onyomi) {
-                d1 = document.getElementById('readingO');
-                d1.insertAdjacentHTML('beforeend', onyomi);
-                table = document.getElementById("readingO");
-                if (table.innerText.length < 10) {
-                    table.rows[0].cells[0].setAttribute("id", "rowS");
-                    document.getElementById("rowS").insertAdjacentHTML('afterend', '<td id="cell" style="width:90%"><p><p> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</p></p></td>');
-                } else {
-                    table.rows[0].cells[0].setAttribute("id", "rowB");
-                    document.getElementById("rowB").insertAdjacentHTML('afterend', '<td id="cell" style="width:8%"></td>');
-                }
-            });
-
-            updateLinks();
-            break;
-
-        case PageEnum.reviews:
-            //console.log('im alive');
-            observer = new MutationObserver(function(mutations) {
-                //console.log('mutation');
-                mutations.forEach(function(mutation) {
-                    //console.log('+++mutation');
-                    //console.log('y u no work');
-
-                    //the setTimeout is copied from   -->   https://stackoverflow.com/a/32572626/5287133
-                    $(document).ready(function() { //When document has loaded
-                        var interval = setInterval(function() { //Code to run After timeout elapses
-                            if (reviewMn()) // run until the page has fully loaded (reviewMn returns false if mlocation is null)
-                            {
-                                reviewOn();
-                                updateLinks();
-                                clearInterval(interval);
-                            }
-                        }, 100); //100ms will elapse and Code will execute.
-                    });
-
-                    console.log(mutation.type);
-                    // The last one always has 2 mutations
-                    if (mutations.length != 2) { return; }   //this line is copied from looki's WaniKani Stroke Order script
-
-                });
-            });
-            observer.observe(document.querySelector('#information'), { attributes: true });
-
-            break;
-
-        case PageEnum.lessons:
-            //lessons:
-
-            //meaning
-            mlocation = document.getElementsByClassName("pure-u-3-4 col2")[0];
-            mp = document.createElement('p');
-            ms = document.createElement('section');
-            ms.setAttribute('id', 'kdmeaning');
-            mlocation.insertBefore(mp, mlocation.children[3]);
-            mlocation.insertBefore(ms, mlocation.children[4]);
-            mheading = document.createElement("H2");
-            mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Meaning Mnemonic";
-            mlocation.insertBefore(mheading, mlocation.children[4]);
-            //reading
-            mlocation = document.getElementsByClassName("pure-u-3-4 col2")[1];
-            mp = document.createElement('p');
-            ms = document.createElement('section');
-            ms.setAttribute('id', 'kdreading');
-            mlocation.insertBefore(mp, mlocation.children[3]);
-            mlocation.insertBefore(ms, mlocation.children[4]);
-            mheading = document.createElement("H2");
-            mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Onyomi Mnemonic";
-            mlocation.insertBefore(mheading, mlocation.children[4]);
-            mp2 = document.createElement("table");
-            mp2.setAttribute("id", "kdrtable");
-            ms.appendChild(mp2);
-
-            var updateThings = function() {
-                document.getElementById("kdmeaning").innerHTML = "Loading...";
+                //meaning
+                mgetElement = document.getElementsByClassName("span12")[1];
+                mlocation = mgetElement.childNodes[mgetElement.childNodes.length-7];
+                msection = document.createElement("SECTION");
+                mp = document.createElement("P");
+                msection.appendChild(mp);
+                mheading = document.createElement("H2");
+                mheading.innerHTML = "<a id='kanjidamage_a1' target='_blank'>KanjiDamage</a> Meaning Mnemonic";
+                msection.appendChild(mheading);
+                mp2 = document.createElement("p");
+                mp2.setAttribute("id", "meaning");
+                msection.appendChild(mp2);
+                mgetElement.insertBefore(msection, mlocation);
+                //mmnemonic = document.createTextNode(getMeaning());
+                document.getElementById("meaning").innerHTML = "Loading...";
                 getMeaning(function(meaning) {
-                    document.getElementById("kdmeaning").innerHTML = meaning;
-                    if (document.getElementById("kdmeaning").innerHTML === "" ) document.getElementById("kdmeaning").innerHTML = "This Kanji has no meaning mnemonic";
+                    document.getElementById("meaning").innerHTML = meaning;
+                    if (document.getElementById("meaning").innerHTML === "" ) document.getElementById("meaning").innerHTML = "This Kanji has no meaning mnemonic";
                 });
 
+                //reading
+                //console.log(getKDPage());
+                mlocation = mgetElement.childNodes[mgetElement.childNodes.length-5];
+                msection = document.createElement("SECTION");
+                mp = document.createElement("P");
+                msection.appendChild(mp);
+                mheading = document.createElement("H2");
+                mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Onyomi Mnemonic";
+                msection.appendChild(mheading);
+                mp2 = document.createElement("table");
+                mp2.setAttribute("id", "readingO");
+                msection.appendChild(mp2);
+                mgetElement.insertBefore(msection, mlocation);
+                //console.log(getOnyomi());
 
                 getOnyomi(function(onyomi) {
-                    document.getElementById("kdrtable").innerHTML = onyomi;
-                    table = document.getElementById("kdrtable");
-                    //console.log(table.innerText);
-                    //console.log(table.innerText.length);
-                    if (table.innerText.length < 16) {
-                        //console.log('true');
-                        if (document.getElementById('rowS'))
-                            document.getElementById("rowS").innerHTML = '<td id="cell" style="width:75%">This Kanji has no reading mnemonic </td>';
-                        else {
-                            table.rows[0].cells[0].setAttribute("id", "rowS");
-                            document.getElementById("rowS").insertAdjacentHTML('afterend', '<td id="cell" style="width:90%"> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</td>');
-                        }
+                    d1 = document.getElementById('readingO');
+                    d1.insertAdjacentHTML('beforeend', onyomi);
+                    table = document.getElementById("readingO");
+                    if (table.innerText.length < 10) {
+                        table.rows[0].cells[0].setAttribute("id", "rowS");
+                        document.getElementById("rowS").insertAdjacentHTML('afterend', '<td id="cell" style="width:90%"><p><p> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</p></p></td>');
                     } else {
-                        //console.log('else');
-                        if (document.getElementById('rowB'))
-                            document.getElementById("rowB").innerHTML = '<td id="cell" style="width:8%"></td>';
-                        else {
-                            if (table.rows[0] != null) {
-                                table.rows[0].cells[0].setAttribute("id", "rowB");
-                                document.getElementById("rowB").insertAdjacentHTML('afterend', '<td id="cell" style="width:8%"></td>');
-                            }
-                        }
+                        table.rows[0].cells[0].setAttribute("id", "rowB");
+                        document.getElementById("rowB").insertAdjacentHTML('afterend', '<td id="cell" style="width:8%"></td>');
                     }
                 });
-                if (getKDPage() !== undefined) console.log("The KanjiDamage page is:   " + getKDPage().substring(29));
-                reviewMn();
-                reviewOn();
+
                 updateLinks();
-            };
+                break;
 
-            observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    //console.log(mutation.type);
-                    updateThings();
+            case PageEnum.reviews:
+                //console.log('im alive');
+                observer = new MutationObserver(function(mutations) {
+                    //console.log('mutation');
+                    mutations.forEach(function(mutation) {
+                        //console.log('+++mutation');
+                        //console.log('y u no work');
+
+                        //the setTimeout is copied from   -->   https://stackoverflow.com/a/32572626/5287133
+                        $(document).ready(function() { //When document has loaded
+                            var interval = setInterval(function() { //Code to run After timeout elapses
+                                if (reviewMn()) // run until the page has fully loaded (reviewMn returns false if mlocation is null)
+                                {
+                                    reviewOn();
+                                    updateLinks();
+                                    clearInterval(interval);
+                                }
+                            }, 100); //100ms will elapse and Code will execute.
+                        });
+
+                        console.log(mutation.type);
+                        // The last one always has 2 mutations
+                        if (mutations.length != 2) { return; }   //this line is copied from looki's WaniKani Stroke Order script
+
+                    });
                 });
-            });
-            observer.observe(document.querySelector('#information'), { attributes: true });
-            observer.observe(document.querySelector('#supplement-kan'), { attributes: true });
+                observer.observe(document.querySelector('#information'), { attributes: true });
 
-            updateThings();
-            break;
-    }
+                break;
+
+            case PageEnum.lessons:
+                //lessons:
+
+                //meaning
+                mlocation = document.getElementsByClassName("pure-u-3-4 col2")[0];
+                mp = document.createElement('p');
+                ms = document.createElement('section');
+                ms.setAttribute('id', 'kdmeaning');
+                mlocation.insertBefore(mp, mlocation.children[3]);
+                mlocation.insertBefore(ms, mlocation.children[4]);
+                mheading = document.createElement("H2");
+                mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Meaning Mnemonic";
+                mlocation.insertBefore(mheading, mlocation.children[4]);
+                //reading
+                mlocation = document.getElementsByClassName("pure-u-3-4 col2")[1];
+                mp = document.createElement('p');
+                ms = document.createElement('section');
+                ms.setAttribute('id', 'kdreading');
+                mlocation.insertBefore(mp, mlocation.children[3]);
+                mlocation.insertBefore(ms, mlocation.children[4]);
+                mheading = document.createElement("H2");
+                mheading.innerHTML = "<a class='kanjidamage_a' target='_blank'>KanjiDamage</a> Onyomi Mnemonic";
+                mlocation.insertBefore(mheading, mlocation.children[4]);
+                mp2 = document.createElement("table");
+                mp2.setAttribute("id", "kdrtable");
+                ms.appendChild(mp2);
+
+                var updateThings = function() {
+                    document.getElementById("kdmeaning").innerHTML = "Loading...";
+                    getMeaning(function(meaning) {
+                        document.getElementById("kdmeaning").innerHTML = meaning;
+                        if (document.getElementById("kdmeaning").innerHTML === "" ) document.getElementById("kdmeaning").innerHTML = "This Kanji has no meaning mnemonic";
+                    });
+
+
+                    getOnyomi(function(onyomi) {
+                        document.getElementById("kdrtable").innerHTML = onyomi;
+                        table = document.getElementById("kdrtable");
+                        //console.log(table.innerText);
+                        //console.log(table.innerText.length);
+                        if (table.innerText.length < 16) {
+                            //console.log('true');
+                            if (document.getElementById('rowS'))
+                                document.getElementById("rowS").innerHTML = '<td id="cell" style="width:75%">This Kanji has no reading mnemonic </td>';
+                            else {
+                                table.rows[0].cells[0].setAttribute("id", "rowS");
+                                document.getElementById("rowS").insertAdjacentHTML('afterend', '<td id="cell" style="width:90%"> This Kanji has no special reading mnemonic (the meaning mnemonic usually includes the reading mnemonic in it) .</td>');
+                            }
+                        } else {
+                            //console.log('else');
+                            if (document.getElementById('rowB'))
+                                document.getElementById("rowB").innerHTML = '<td id="cell" style="width:8%"></td>';
+                            else {
+                                if (table.rows[0] != null) {
+                                    table.rows[0].cells[0].setAttribute("id", "rowB");
+                                    document.getElementById("rowB").insertAdjacentHTML('afterend', '<td id="cell" style="width:8%"></td>');
+                                }
+                            }
+                        }
+                    });
+                    if (getKDPage() !== undefined) console.log("The KanjiDamage page is:   " + getKDPage().substring(29));
+                    reviewMn();
+                    reviewOn();
+                    updateLinks();
+                };
+
+                observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        //console.log(mutation.type);
+                        updateThings();
+                    });
+                });
+                observer.observe(document.querySelector('#information'), { attributes: true });
+                observer.observe(document.querySelector('#supplement-kan'), { attributes: true });
+
+                updateThings();
+                break;
+        }
+    });
 })();
 
 
