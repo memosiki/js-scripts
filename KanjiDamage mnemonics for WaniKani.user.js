@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name             KanjiDamage mnemonics for WaniKani
-// @version          1.2
+// @version          1.3
 // @description      Displays additional mnemonics for the given kanji.
 // @namespace        https://github.com/grenzionky/KanjiDamage-mnemonics-for-WaniKani/blob/master/KanjiDamage%20mnemonics%20for%20WaniKani.user.js
 // @supportURL       https://community.wanikani.com/t/userscript-kanjidamage-mnemonics-for-wanikani/18845
@@ -9,7 +9,7 @@
 // @match            *://www.wanikani.com/*/kanji*
 // @match            *://www.wanikani.com/lesson/session*
 // @author           Abraham Gross
-// @license          MIT License Copyright (c) 2017 Abraham Gross
+// @license          MIT
 // ==/UserScript==
 
 //First and foremost, I would like to give a MASSIVE thanks to KanjiDamage.com for having made an amazing index of great mnemonics!!!
