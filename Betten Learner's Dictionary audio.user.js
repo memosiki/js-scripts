@@ -6,7 +6,6 @@
 // @author       Abraham Gross
 // @match        *.learnersdictionary.com/*
 // @license      MIT
-// @grant        none
 // ==/UserScript==
 
 (function() {
