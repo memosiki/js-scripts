@@ -4,8 +4,8 @@
 // @version      7.2.2018
 // @description  Play the word's audio onclick right away without the popup
 // @match        *.learnersdictionary.com/*
-// @author           Abraham Gross
-// @license          MIT
+// @author       Abraham Gross
+// @license      MIT
 // ==/UserScript==
 
 (function() {
