@@ -5,6 +5,7 @@
 // @description  Play the word's audio onclick right away without the popup
 // @author       Abraham Gross
 // @match        *.learnersdictionary.com/*
+// @license      MIT
 // @grant        none
 // ==/UserScript==
 
