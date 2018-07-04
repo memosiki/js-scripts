@@ -3,9 +3,9 @@
 // @namespace    http://tampermonkey.net/
 // @version      7.2.2018
 // @description  Play the word's audio onclick right away without the popup
-// @author       Abraham Gross
 // @match        *.learnersdictionary.com/*
-// @license      MIT
+// @author           Abraham Gross
+// @license          MIT
 // ==/UserScript==
 
 (function() {
