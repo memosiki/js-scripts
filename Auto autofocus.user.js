@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto autofocus
-// @version      1.1
-// @description  Auto focuses the cursor in websites to the first input box or search field
+// @version      1.2
+// @description  Auto focuses the cursor in websites to the main search field
 // @author       Abraham Gross
 // @include      http*
 // @grant        none
@@ -26,8 +26,8 @@
     }
     
     //reiterate over all the text inputs to isolate the best match
-    for(var i = betterInputs.length - 1; i >= 0; --i) {
-	    var input = betterInputs[i];
+    for(var j = betterInputs.length - 1; j >= 0; --j) {
+	    var input = betterInputs[j];
 	    if(input.classList.toString().toLowerCase().includes("search") || input.placeholder.toLowerCase().includes("search")) {
             input.focus();
         }
