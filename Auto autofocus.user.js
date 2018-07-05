@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Auto autofocus
-// @version      1.2
+// @version      1.2.1
 // @description  Auto focuses the cursor in websites to the main search field
 // @author       Abraham Gross
 // @include      http*
