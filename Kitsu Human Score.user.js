@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kitsu Human Score
 // @namespace    http://tampermonkey.net/
-// @version      7.15.2018
+// @version      1.0.1
 // @description  Puts words next to the rating while rating an anime for a more accurate way to select how you thought an anime was.
 // @author       Abraham Gross
 // @match        https://kitsu.io/users/*
@@ -48,10 +48,10 @@ function addWord() {
         case "5": score.textContent = score.textContent + " (Average)";
             break;
         case "4.5":
-        case "4": score.textContent = score.textContent + " (Bad)";
+        case "4": score.textContent = score.textContent + " (Boring)";
             break;
         case "3.5":
-        case "3": score.textContent = score.textContent + " (Very Bad)";
+        case "3": score.textContent = score.textContent + " (Bad)";
             break;
         case "2.5":
         case "2": score.textContent = score.textContent + " (Horrible)";
