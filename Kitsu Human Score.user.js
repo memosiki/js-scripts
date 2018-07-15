@@ -6,6 +6,8 @@
 // @author       Abraham Gross
 // @match        https://kitsu.io/users/*
 // @require      https://code.jquery.com/jquery-2.1.4.min.js
+// @updateURL    https://openuserjs.org/meta/grenzionky/Kitsu_Human_Score.meta.js
+// @downloadURL  https://openuserjs.org/install/grenzionky/Kitsu_Human_Score.user.js
 // @license      MIT
 
 // ==/UserScript==
