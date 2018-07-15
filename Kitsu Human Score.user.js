@@ -2,7 +2,7 @@
 // @name         Kitsu Human Score
 // @namespace    http://tampermonkey.net/
 // @version      7.15.2018 - 1.0
-// @description  Puts words next to the score for a more accurate way to select how you thought an anime was.
+// @description  Puts words next to the rating while rating an anime for a more accurate way to select how you thought an anime was.
 // @author       Abraham Gross
 // @match        https://kitsu.io/users/*
 // @require      https://code.jquery.com/jquery-2.1.4.min.js
