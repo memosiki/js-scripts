@@ -11,6 +11,7 @@
 // @include      *stream.moe*
 // @grant        GM_openInTab
 // @grant        GM_xmlhttpRequest
+// @license      MIT
 // ==/UserScript==
 
 /*
