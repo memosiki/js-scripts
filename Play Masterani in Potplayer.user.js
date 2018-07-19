@@ -2,6 +2,7 @@
 // @name         Play Masterani in Potplayer
 // @namespace    http://tampermonkey.net/
 // @version      1.0
+// @license      MIT
 // @description  Will automatically play videos in potplayer
 // @author       Abraham Gross
 // @include      *mp4upload.com*
@@ -11,7 +12,6 @@
 // @include      *stream.moe*
 // @grant        GM_openInTab
 // @grant        GM_xmlhttpRequest
-// @license      MIT
 // ==/UserScript==
 
 /*
