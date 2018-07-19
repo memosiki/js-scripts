@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Play Masterani in Potplayer
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @license      MIT
 // @description  Will automatically play videos in potplayer
 // @author       Abraham Gross
