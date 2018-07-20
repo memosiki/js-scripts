@@ -1,6 +1,8 @@
 // ==UserScript==
 // @name         Play Masterani in Potplayer
 // @namespace    http://tampermonkey.net/
+// @updateURL    https://openuserjs.org/meta/grenzionky/Play_Masterani_in_Potplayer.meta.js
+// @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Play_Masterani_in_Potplayer.user.js
 // @version      1.0.2
 // @license      MIT
 // @description  Will automatically play videos in potplayer
