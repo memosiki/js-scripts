@@ -52,4 +52,6 @@
 
         document.activeElement.select();
     }
+    //if an element at the bottom of the page gets selected it would be annoying to have to scroll back up
+    window.scrollTo(0,0);
 }})();
