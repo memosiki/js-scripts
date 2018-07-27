@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://openuserjs.org/meta/grenzionky/Play_Masterani_in_Potplayer.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Play_Masterani_in_Potplayer.user.js
-// @version      1.1.0
+// @version      1.1.1
 // @license      MIT
 // @description  Will automatically play videos in potplayer
 // @author       Abraham Gross
@@ -25,6 +25,9 @@ add this to regedit (source: https://stackoverflow.com/a/31206594/5287133):
 
 [HKEY_CLASSES_ROOT\potplayer\shell\open\command]
 @="cmd /k ( set \"var=%1\" & call set var=%%var:potplayer://=%% & call C:\\PotPlayer\\PotPlayer.exe %%var%%)"
+
+Or if you're not sure how to, here's a .reg file that will do it for you:
+https://drive.google.com/file/d/1FcXvFzT1FDaN4AQBNKb4Qe9Dd0_WuD1g/view?usp=sharing
 
 */
 
