@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         Auto autofocus
-// @version      1.4.1
+// @version      1.5
 // @description  Auto focuses the cursor in websites to the main search field
 // @author       Abraham Gross
 // @include      http*
 // @grant        none
 // @license      MIT
 // @run-at document-idle
+// @updateURL    https://openuserjs.org/meta/grenzionky/Auto_autofocus.meta.js
+// @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Auto_autofocus.user.js
 // ==/UserScript==
 
 (function() {window.onload = function() {
@@ -17,7 +19,8 @@
     var gotFocused = false;
     //will be used to reiterate over the possible matches to find a more accurate result
     var betterInputs = [];
-
+    //get the current scroll position so that the script doesn't change it by mistake
+    var scrollPos = window.scrollY;
 
     if(allInputs.length > 0) {
         //first check if the website defined any search fields themselves
@@ -53,5 +56,5 @@
         document.activeElement.select();
     }
     //if an element at the bottom of the page gets selected it would be annoying to have to scroll back up
-    window.scrollTo(0,0);
+    window.scrollTo(0, scrollPos);
 }})();
