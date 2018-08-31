@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Play Hosted Embeded Videos in Potplayer
+// @name         Play Hosted Videos in Potplayer
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://openuserjs.org/meta/grenzionky/Play_Masterani_in_Potplayer.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Play_Masterani_in_Potplayer.user.js
