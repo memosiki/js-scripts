@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name         Auto autofocus
-// @version      1.6
+// @version      1.7
 // @description  Auto focuses the cursor in websites to the main search field
 // @author       Abraham Gross
 // @include      http*
 // @grant        none
 // @license      MIT
-// @run-at document-idle
+// @run-at       document-idle
 // @updateURL    https://openuserjs.org/meta/grenzionky/Auto_autofocus.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Auto_autofocus.user.js
 // ==/UserScript==
 
-(function() {window.onload = function() {
+(function() {
     //run it right when the page loads
     autofocus();
 
@@ -20,7 +20,7 @@
         if(event.ctrlKey && event.shiftKey)
             autofocus();
     });
-}})();
+})();
 
 function autofocus() {
     //get all of the inputs in the document
