@@ -26,20 +26,6 @@ var SUBTITLE = "English";
 
         }
     });
-
-    //     var observer = new MutationObserver(function(mutations) {
-    //         mutations.forEach(function(mutation) {
-    //             mutation.addedNodes.forEach(function(node) {
-    //                 if(node.nodeName.toUpperCase() == 'DIV') {
-    //                     let subsMenu = (node).querySelector("ul.track-list.structural.track-list-subtitles");
-    //                     if(subsMenu) {
-    //                         toggle(subsMenu);
-    //                     }
-    //                 }
-    //             });
-    //         });
-    //     });
-    //     observer.observe(document.body, { childList: true, subtree: true });
 })();
 
 function toggle(subsMenu) {
