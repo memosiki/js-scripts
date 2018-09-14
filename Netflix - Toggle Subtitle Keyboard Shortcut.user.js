@@ -2,7 +2,7 @@
 // @name        Netflix - Toggle Subtitle Keyboard Shortcut
 // @description When pressing 'a', the preselected subtitle will automatically be toggled.
 // @license     MIT
-// @version     2.0
+// @version     2.1
 // @include     https://www.netflix.com/*
 // @grant       none
 // @updateURL   https://openuserjs.org/meta/grenzionky/Netflix_-_Toggle_Subtitle_Keyboard_Shortcut.meta.js
@@ -31,19 +31,25 @@ var SUBTITLE = "English";
 
 function toggle(subsMenu) {
     var subsoff = false;
+    var iteration = 0;
     document.querySelector("div > ul.track-list.structural.track-list-subtitles").childNodes.forEach(function(lang) {
         if(lang.getAttribute('class')==='list-header') return;
         var currentSub = lang.getAttribute('data-uia').match(/\w+$/)[0];
         var isSelected = lang.getAttribute('class').includes("selected");
         if(isSelected) console.log("Selected Subtitle: "+currentSub);
-        if(currentSub === "Off") {
-            //if subtitles are turned off
-            if(isSelected) subsoff = true;
-            else lang.click();
-        }
-        if(currentSub === SUBTITLE && subsoff) {
+        if(iteration === 0) {
+            if(currentSub === "Off") {
+                //if subtitles are turned off
+                if(isSelected) subsoff = true;
+                else lang.click();
+            } else if (currentSub === SUBTITLE) {
+                if(isSelected) subsoff = false;
+                else lang.click();
+            }
+        } else if ((currentSub === SUBTITLE && subsoff) || (currentSub === "Off" && !subsoff)) {
             lang.click();
-            subsoff = false;
+            subsoff = !subsoff;
         }
     });
+    iteration = 0;
 }
