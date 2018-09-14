@@ -5,6 +5,7 @@
 // @version     2.0
 // @include     https://www.netflix.com/*
 // @grant       none
+// @updateURL   https://openuserjs.org/meta/grenzionky/Netflix_-_Toggle_Subtitle_Keyboard_Shortcut.meta.js
 // ==/UserScript==
 
 //To get the name of your specific subtitle language open the console and select it. It will show up as "Selected Subtitle: Language"
