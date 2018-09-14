@@ -5,6 +5,8 @@
 // @version     1.0
 // @include     https://www.netflix.com/*
 // @grant       none
+// @updateURL https://openuserjs.org/meta/grenzionky/Netflix_-_Auto_select_subtitle.meta.js
+
 // ==/UserScript==
 
 //To get the name of your specific subtitle language open the console and select it. It will show up as "Selected Subtitle: Language"
