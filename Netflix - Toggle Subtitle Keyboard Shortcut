@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Netflix - Subtitle Select Keyboard Shortcut
+// @name        Netflix - Toggle Subtitle Keyboard Shortcut
 // @description When pressing 'a', the preselected subtitle will automatically be toggled.
 // @license     MIT
 // @version     2.0
@@ -8,15 +8,13 @@
 // ==/UserScript==
 
 //To get the name of your specific subtitle language open the console and select it. It will show up as "Selected Subtitle: Language"
-var SUBTITLE = "Japanese";
+var SUBTITLE = "English";
 
 (function(){
     document.addEventListener('keydown', function(event){
         if(event.code==='KeyA') {
-            console.log(event.code);
             setTimeout(function(){
                 let subsMenu = document.querySelector("#appMountPoint > div > div > div > div > div > div.nfp.AkiraPlayer.classic-ui > div > div.controls.legacy-controls-styles.PlayerControls--with-dim-background.active > div > div.PlayerControls--main-controls > div.PlayerControls--bottom-controls.nfp-control-row.bottom-controls > div.PlayerControls--button-control-row > div:nth-child(7) > button");
-                console.log(subsMenu);
                 if(subsMenu) {
                     subsMenu.click();
                     toggle(subsMenu);
