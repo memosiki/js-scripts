@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Auto autofocus
-// @version      1.7
+// @version      2.0
 // @description  Auto focuses the cursor in websites to the main search field
 // @author       Abraham Gross
 // @include      http*
@@ -12,12 +12,16 @@
 // ==/UserScript==
 
 (function() {
+    //get the current scroll position so that the script doesn't change it by mistake
+    var scrollPos = window.scrollY;
     //run it right when the page loads
     autofocus();
+    //if an element at the bottom of the page gets selected it would be annoying to have to scroll back up
+    window.scrollTo(0, scrollPos);
 
-    //run it when user presses ctrl+shift
+    //run it when user presses meta(windows)+shift
     document.addEventListener('keydown', function(event){
-        if(event.ctrlKey && event.shiftKey)
+        if(event.metaKey && event.shiftKey)
             autofocus();
     });
 })();
@@ -29,8 +33,6 @@ function autofocus() {
     var gotFocused = false;
     //will be used to reiterate over the possible matches to find a more accurate result
     var betterInputs = [];
-    //get the current scroll position so that the script doesn't change it by mistake
-    var scrollPos = window.scrollY;
 
     if(allInputs.length > 0) {
         //first check if the website defined any search fields themselves
@@ -65,6 +67,4 @@ function autofocus() {
 
         document.activeElement.select();
     }
-    //if an element at the bottom of the page gets selected it would be annoying to have to scroll back up
-    window.scrollTo(0, scrollPos);
 }
