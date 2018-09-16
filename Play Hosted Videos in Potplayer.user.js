@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://openuserjs.org/meta/grenzionky/Play_Masterani_in_Potplayer.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Play_Masterani_in_Potplayer.user.js
-// @version      1.2.3
+// @version      1.2.4
 // @license      MIT
 // @description  Will automatically play videos in potplayer that are hosted on video hosting sites (if a site is missing request it, or pull the link)
 // @author       Abraham Gross
@@ -14,6 +14,7 @@
 // @include      *stream.moe*
 // @include      *vidstreaming.io*
 // @include      *masterani.me*
+// @include      *mystream.to*
 // @include      https://www.watchcartoononline.com/*
 // @grant        GM_openInTab
 // @grant        GM_xmlhttpRequest
