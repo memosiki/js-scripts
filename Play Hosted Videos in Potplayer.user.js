@@ -14,7 +14,7 @@
 // @include      *stream.moe*
 // @include      *vidstreaming.io*
 // @include      *masterani.me*
-// @include      *mystream.to*
+// @include      *msembed.net*
 // @include      https://www.watchcartoononline.com/*
 // @grant        GM_openInTab
 // @grant        GM_xmlhttpRequest
@@ -50,7 +50,7 @@ https://drive.google.com/file/d/1FcXvFzT1FDaN4AQBNKb4Qe9Dd0_WuD1g/view?usp=shari
 
 function openVideo(document) {
     var video = document.getElementsByTagName('video')[0];
-    //     console.log(video);
+//     console.log(video);
 
     try {
         video = video.firstElementChild.src;
