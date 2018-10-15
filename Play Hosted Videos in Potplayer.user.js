@@ -10,7 +10,6 @@
 // @include      *mp4upload.com*
 // @include      *streamango.com*
 // @include      *rapidvideo.com*
-// @include      *openload.co*
 // @include      *stream.moe*
 // @include      *vidstreaming.io*
 // @include      *masterani.me*
