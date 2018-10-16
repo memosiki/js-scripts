@@ -3,13 +3,14 @@
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://openuserjs.org/meta/grenzionky/Play_Masterani_in_Potplayer.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/grenzionky/Play_Masterani_in_Potplayer.user.js
-// @version      1.2.4
+// @version      1.3
 // @license      MIT
 // @description  Will automatically play videos in potplayer that are hosted on video hosting sites (if a site is missing request it, or pull the link)
 // @author       Abraham Gross
 // @include      *mp4upload.com*
 // @include      *streamango.com*
 // @include      *rapidvideo.com*
+// @include      *openload.co*
 // @include      *stream.moe*
 // @include      *vidstreaming.io*
 // @include      *masterani.me*
@@ -41,6 +42,8 @@ https://drive.google.com/file/d/1FcXvFzT1FDaN4AQBNKb4Qe9Dd0_WuD1g/view?usp=shari
             var text = document.querySelector('#moe-framer').innerText;
             var enc = text.substring(text.indexOf("atob('"));
             openVideo(new DOMParser().parseFromString(atob(enc.substring(6, enc.indexOf("');"))), "text/html"));
+        } else if(window.location.href.includes("openload.co")) {
+            document.querySelector("#videooverlay").onclick = function(){openVideo(document);}
         } else {
             openVideo(document);
         }
@@ -49,14 +52,13 @@ https://drive.google.com/file/d/1FcXvFzT1FDaN4AQBNKb4Qe9Dd0_WuD1g/view?usp=shari
 
 function openVideo(document) {
     var video = document.getElementsByTagName('video')[0];
-//     console.log(video);
 
     try {
         video = video.firstElementChild.src;
     } catch(error) {
-        video = video.src;
+        video = "potplayer://"+video.src;
     }
 
     console.log(video);
-    GM_openInTab("potplayer://" + video, {loadInBackground: true}).close();
+    GM_openInTab(video, {loadInBackground: true}).close();
 }
