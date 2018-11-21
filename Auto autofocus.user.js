@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Auto autofocus
-// @version      2.0
+// @version      2.1
 // @description  Auto focuses the cursor in websites to the main search field
 // @author       Abraham Gross
 // @include      http*
+// @exclude      *usps.com*
 // @grant        none
 // @license      MIT
 // @run-at       document-idle
@@ -37,7 +38,7 @@ function autofocus() {
     if(allInputs.length > 0) {
         //first check if the website defined any search fields themselves
         for(var i=allInputs.length-1; i>=0; --i) {
-            if(allInputs[i].type.toLowerCase().startsWith("search")) {
+            if(allInputs[i].type.toLowerCase().startsWith("search")||allInputs[i].type.toLowerCase().startsWith("検索")) {
                 allInputs[i].focus();
                 gotFocused = true;
             }
@@ -56,7 +57,7 @@ function autofocus() {
 
             //reiterate over all the text inputs to isolate the best match
             for(var k = betterInputs.length - 1; k >= 0; --k) {
-                if(betterInputs[k].classList.toString().toLowerCase().includes("search") || betterInputs[k].placeholder.toLowerCase().includes("search")) {
+                if(betterInputs[k].classList.toString().toLowerCase().includes("search") || betterInputs[k].placeholder.toLowerCase().includes("search") || betterInputs[k].classList.toString().toLowerCase().includes("検索") || betterInputs[k].placeholder.toLowerCase().includes("検索")) {
                     betterInputs[k].focus();
                 }
             }
